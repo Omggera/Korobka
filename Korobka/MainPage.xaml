@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Korobka.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="10,0"
+            Spacing="10">
+
+            <Label
+                Text="Данные поставки"
+                FontSize="32"
+                HorizontalOptions="Center"
+                Margin="20"/>
+
+            <Label
+                Text="Город"
+                FontSize="18" />
+            <Frame 
+                BorderColor="Gray" 
+                HasShadow="False" 
+                HeightRequest="40" 
+                WidthRequest="200" 
+                Margin="0,0,0,20"
+                HorizontalOptions="Start">
+                <Picker 
+                    FontSize="16"
+                    HeightRequest="40"
+                    WidthRequest="200"
+                    HorizontalOptions="Start"
+                    x:Name="City"
+                    Title="Выберите ваш город"
+                    SelectedIndexChanged="City_SelectedIndexChanged">
+                    <Picker.Items>
+                        <x:String>Владимир</x:String>
+                        <x:String>Иваново</x:String>
+                        <x:String>Муром</x:String>
+                        <x:String>Ковров</x:String>
+                    </Picker.Items>
+                </Picker>
+            </Frame>
+
+            <Label
+                Text="Отправить в"
+                FontSize="18" />
+            <StackLayout 
+                RadioButtonGroup.GroupName="Warehouse" 
+                Spacing="10" 
+                Margin="0,0,0,20" >
+                <RadioButton 
+                    x:Name="koled" 
+                    Content="" 
+                    Value="Коледино" 
+                    FontSize="16"
+                    CheckedChanged="Warehouse_CheckedChanged" />
+                <RadioButton 
+                    x:Name="stal"
+                    Content="" 
+                    Value="Электросталь"
+                    FontSize="16"
+                    CheckedChanged="Warehouse_CheckedChanged" />
+            </StackLayout>
+
+            <Label
+                Text="ФИО"
+                FontSize="18" />
+            <Frame 
+                BorderColor="Gray" 
+                HasShadow="False" 
+                HeightRequest="40" 
+                Margin="0,0,0,20">
+                <Entry
+                    Placeholder = "Иванов Иван Иванович"
+                    FontSize="16" 
+                    MaxLength ="50"
+                    HeightRequest="40">
+                    <Entry.Keyboard>
+                        <Keyboard x:FactoryMethod="Create">
+                            <x:Arguments>
+                                <KeyboardFlags>CapitalizeWord</KeyboardFlags>
+                            </x:Arguments>
+                        </Keyboard>
+                    </Entry.Keyboard>
+                </Entry>
+            </Frame>
+
+            <Label
+                Text="Номер телефона"
+                FontSize="18" />
+            <Frame 
+                BorderColor="Gray" 
+                HasShadow="False" 
+                HeightRequest="40" 
+                Margin="0,0,0,20">
+                <Entry
+                    Placeholder = "9011418686"
+                    FontSize="16" 
+                    MaxLength ="10"
+                    HeightRequest="40"
+                    Keyboard="Telephone"/>
+            </Frame>
+
+            <Label
+                Text="Адрес электронной почты"
+                FontSize="18" />
+            <Frame 
+                BorderColor="Gray" 
+                HasShadow="False" 
+                HeightRequest="40" 
+                Margin="0,0,0,20">
+                <Entry
+                    Placeholder = "ivanov@yandex.ru"
+                    FontSize="16" 
+                    MaxLength ="50"
+                    HeightRequest="40"
+                    Keyboard="Email"/>
+            </Frame>
+
+            <Label
+                Text="Отправить в"
+                FontSize="18" />
+            <StackLayout 
+                RadioButtonGroup.GroupName="GetMethod" 
+                Spacing="10" 
+                Margin="0,0,0,20" >
+                <RadioButton 
+                    x:Name="sam" 
+                    Content="Привезу самостоятельно" 
+                    Value="Привезет самостоятельно" 
+                    FontSize="16"
+                    CheckedChanged="GetMethod_CheckedChanged"/>
+                <RadioButton 
+                    x:Name="vivoz"
+                    Content="Мне нужен вывоз" 
+                    Value="Нужен вывоз"
+                    FontSize="16"
+                    CheckedChanged="GetMethod_CheckedChanged" />
+            </StackLayout>
+
+            <Label 
+                x:Name="adress"
+                Text="Адрес"
+                FontSize="18"
+                IsVisible="false"/>
+            <Frame 
+                x:Name="adressFrame"
+                BorderColor="Gray" 
+                HasShadow="False" 
+                HeightRequest="40" 
+                Margin="0,0,0,20"
+                IsVisible="false">
+                <Entry
+                    Placeholder = "Город, улица, дом, подъезд"
+                    FontSize="16" 
+                    MaxLength ="70"
+                    HeightRequest="40"
+                    Keyboard="Text"/>
+            </Frame>
+
+
+            <Entry x:Name="entry"
+                   Text=""
+                   Placeholder="Enter text" />
+                        <Button Text="Save">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button"
+                                 Binding="{Binding Source={x:Reference entry},
+                                                   Path=Text.Length}"
+                                 Value="0">
+                                    <Setter Property="IsEnabled"
+                                Value="False" />
+                                    <!-- Multiple Setter elements are allowed -->
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+
+
+            <Button
+                x:Name="CounterBtn"
+                Text="Click me"
+                SemanticProperties.Hint="Counts the number of times you click"
+                HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
