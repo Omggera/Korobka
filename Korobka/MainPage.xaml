@@ -158,6 +158,12 @@
                     Keyboard="Text"/>
             </Frame>
 
+            <StackLayout Padding="8" Orientation="Horizontal">
+                <CheckBox x:Name="statusCheckBox" />
+                <Label FontSize="16"  Text="женат/замужем" />
+            </StackLayout>
+
+
 
             <Entry x:Name="entry"
                    Text=""
