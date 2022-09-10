@@ -1,10 +1,21 @@
-﻿namespace Korobka;
+﻿using Korobka.MVVM;
+using System.Collections.ObjectModel;
+
+namespace Korobka;
 
 public partial class MainPage : ContentPage
 {
     DateTime date = DateTime.Now;
     DateTime dateWednesday = new DateTime();
     DateTime dateMonday = new DateTime();
+
+    ObservableCollection<BarCodeClass> barCodeCollection = new ObservableCollection<BarCodeClass>();
+    public ObservableCollection<BarCodeClass> BarCodeCollection { get { return barCodeCollection; } }
+
+    public class BarCodeClass
+    {
+        public string BarCode { get; set; }
+    }
 
     public MainPage()
 	{
@@ -15,7 +26,7 @@ public partial class MainPage : ContentPage
         koled.Content = $"Коледино, {dateMonday.ToString("ddd dd MMMM yyyy")}";
         stal.Content = $"Электросталь, {dateWednesday.ToString("ddd dd MMMM yyyy")}";
 
-
+        ListViewBarCode.ItemsSource = barCodeCollection;
     }
 
     public void DateDelivery()
@@ -81,6 +92,18 @@ public partial class MainPage : ContentPage
             adress.IsVisible = false;
             adressFrame.IsVisible = false;
         }
+    }
+
+    private void EntryBarCode_Completed(object sender, EventArgs e)
+    {
+        barCodeCollection.Add(new BarCodeClass() { BarCode = $"{BarCodeEntry.Text}"});
+        BarCodeEntry.Text = "";
+    }
+
+    private void ListViewBarCode_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+        
+        
     }
 }
 

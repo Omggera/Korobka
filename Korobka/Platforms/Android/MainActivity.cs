@@ -2,6 +2,7 @@
 using Android.Content.PM;
 using Android.OS;
 using Android.Views;
+using Microsoft.Maui.Controls.Compatibility.Platform.Android;
 
 namespace Korobka;
 

@@ -1,8 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Korobka.MVVM"
              x:Class="Korobka.MainPage">
 
+    <ContentPage.BindingContext>
+        <local:BarCodesClass />
+    </ContentPage.BindingContext>
+    
     <ScrollView>
         <VerticalStackLayout
             Padding="10,0"
@@ -158,12 +163,51 @@
                     Keyboard="Text"/>
             </Frame>
 
-            <StackLayout Padding="8" Orientation="Horizontal">
+            <Label
+                Text="Введите ШК коробок по очереди"
+                FontSize="18" />
+            <Frame 
+                BorderColor="Gray" 
+                HasShadow="False" 
+                HeightRequest="40" 
+                Margin="0,0,0,20">
+                <Entry
+                    x:Name="BarCodeEntry"
+                    Placeholder = "80274257"
+                    FontSize="16" 
+                    MaxLength ="8"
+                    HeightRequest="40"
+                    Keyboard="Numeric"
+                    ClearButtonVisibility="WhileEditing"
+                    Completed="EntryBarCode_Completed"/>
+            </Frame>
+
+            <ListView 
+                x:Name="ListViewBarCode" 
+                ItemsSource="{Binding BarCodeCollection}"
+                ItemSelected="ListViewBarCode_ItemSelected" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding BarCode}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <!--
+            <CollectionView ItemsSource="{Binding BarCodesClass}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Label
+                            Text="{Binding BarCode}" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            -->
+
+                <StackLayout Padding="8" Orientation="Horizontal">
                 <CheckBox x:Name="statusCheckBox" />
-                <Label FontSize="16"  Text="женат/замужем" />
+                <Label FontSize="16"  Text="текст" />
             </StackLayout>
-
-
 
             <Entry x:Name="entry"
                    Text=""
