@@ -185,10 +185,25 @@
             <ListView 
                 x:Name="ListViewBarCode" 
                 ItemsSource="{Binding BarCodeCollection}"
-                ItemSelected="ListViewBarCode_ItemSelected" >
+                ItemSelected="ListViewBarCode_ItemSelected"
+                IsVisible="false" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
+                        <!--
                         <TextCell Text="{Binding BarCode}" />
+                        -->
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Delete"
+                              Command="{Binding Source={x:Reference ListViewBarCode}, Path=BindingContext.DeleteCommand}"
+                              CommandParameter="{Binding}" />
+                            </ViewCell.ContextActions>
+                            <Label
+                                Text="{Binding BarCode}"
+                                FontSize="16">
+                                
+                            </Label>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

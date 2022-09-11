@@ -98,6 +98,11 @@ public partial class MainPage : ContentPage
     {
         barCodeCollection.Add(new BarCodeClass() { BarCode = $"{BarCodeEntry.Text}"});
         BarCodeEntry.Text = "";
+
+        if (barCodeCollection.Count > 0)
+        {
+            ListViewBarCode.IsVisible = true;
+        }
     }
 
     private void ListViewBarCode_ItemSelected(object sender, SelectedItemChangedEventArgs e)
