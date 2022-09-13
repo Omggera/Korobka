@@ -1,4 +1,5 @@
 ﻿using Korobka.MVVM;
+using Microsoft.VisualBasic;
 using System.Collections.ObjectModel;
 
 namespace Korobka;
@@ -26,7 +27,8 @@ public partial class MainPage : ContentPage
         koled.Content = $"Коледино, {dateMonday.ToString("ddd dd MMMM yyyy")}";
         stal.Content = $"Электросталь, {dateWednesday.ToString("ddd dd MMMM yyyy")}";
 
-        ListViewBarCode.ItemsSource = barCodeCollection;
+        //ListViewBarCode.ItemsSource = barCodeCollection;
+        CollectionViewBarCode.ItemsSource = barCodeCollection;
     }
 
     public void DateDelivery()
@@ -103,6 +105,15 @@ public partial class MainPage : ContentPage
     private void ListViewBarCode_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
         
+        
+    }
+
+    private void CollectionViewBarCode_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        string previous = (e.PreviousSelection.FirstOrDefault() as BarCodeClass)?.BarCode;
+        string current = (e.CurrentSelection.FirstOrDefault() as BarCodeClass)?.BarCode;
+        wwe.Text = $"Вы выбрали {current}";
+
         
     }
 }

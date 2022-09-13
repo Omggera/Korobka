@@ -4,6 +4,29 @@
              xmlns:local="clr-namespace:Korobka.MVVM"
              x:Class="Korobka.MainPage">
 
+    <ContentPage.Resources>
+        <Style TargetType="SwipeView">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="White" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="LightSkyBlue" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
     <ContentPage.BindingContext>
         <local:BarCodesClass />
     </ContentPage.BindingContext>
@@ -182,6 +205,7 @@
                     Completed="EntryBarCode_Completed"/>
             </Frame>
 
+            <!---
             <ListView 
                 x:Name="ListViewBarCode" 
                 ItemsSource="{Binding BarCodeCollection}"
@@ -193,18 +217,44 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <!--
-            <CollectionView ItemsSource="{Binding BarCodesClass}">
+            -->
+
+            <CollectionView 
+                x:Name="CollectionViewBarCode"
+                ItemsSource="{Binding BarCodeCollection}"
+                SelectionMode="Single"
+                SelectionChanged="CollectionViewBarCode_SelectionChanged">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Label
-                            Text="{Binding BarCode}" />
+                        <SwipeView >
+                            <SwipeView.LeftItems>
+                                <SwipeItems>
+                                    <SwipeItem 
+                                        Text="Удалить"
+                                        BackgroundColor="Red"
+                                        Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.DeleteCommand}"
+                                        CommandParameter="{Binding}" />
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+                            <Grid 
+                                Padding="10">
+                                <Label 
+                                    Text="{Binding BarCode}"
+                                    FontSize="16"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"/>
+                            </Grid>
+                        </SwipeView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            -->
 
-                <StackLayout Padding="8" Orientation="Horizontal">
+            <Label
+                x:Name="wwe"
+                Text=""
+                FontSize="18" />
+
+            <StackLayout Padding="8" Orientation="Horizontal">
                 <CheckBox x:Name="statusCheckBox" />
                 <Label FontSize="16"  Text="текст" />
             </StackLayout>
