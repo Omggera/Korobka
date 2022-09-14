@@ -1,6 +1,7 @@
-﻿using Korobka.MVVM;
+﻿using Microsoft.Maui.Controls.Internals;
 using Microsoft.VisualBasic;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Korobka;
 
@@ -12,6 +13,10 @@ public partial class MainPage : ContentPage
 
     ObservableCollection<BarCodeClass> barCodeCollection = new ObservableCollection<BarCodeClass>();
     public ObservableCollection<BarCodeClass> BarCodeCollection { get { return barCodeCollection; } }
+
+    BarCodeClass deleteCode;
+
+    public ICommand DeleteCom => new Command<BarCodeClass>(DeleteCommand);
 
     public class BarCodeClass
     {
@@ -29,6 +34,7 @@ public partial class MainPage : ContentPage
 
         //ListViewBarCode.ItemsSource = barCodeCollection;
         CollectionViewBarCode.ItemsSource = barCodeCollection;
+
     }
 
     public void DateDelivery()
@@ -101,16 +107,10 @@ public partial class MainPage : ContentPage
         barCodeCollection.Add(new BarCodeClass() { BarCode = $"{BarCodeEntry.Text}"});
         BarCodeEntry.Text = "";
 
-        if (barCodeCollection.Count > 0)
-        {
-            ListViewBarCode.IsVisible = true;
-        }
-    }
-
-    private void ListViewBarCode_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-    {
-        
-        
+        //if (barCodeCollection.Count > 0)
+        //{
+        //    CollectionViewBarCode.IsVisible = true;
+        //}
     }
 
     private void CollectionViewBarCode_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -119,7 +119,16 @@ public partial class MainPage : ContentPage
         string current = (e.CurrentSelection.FirstOrDefault() as BarCodeClass)?.BarCode;
         wwe.Text = $"Вы выбрали {current}";
 
-        
+        BarCodeClass cur = (e.CurrentSelection.FirstOrDefault() as BarCodeClass);
+
+        deleteCode = cur;
+        //DeleteCommand(cur);
     }
+
+    private void DeleteCommand(BarCodeClass deleteCode)
+    {
+        barCodeCollection.Remove(deleteCode);
+    }
+
 }
 

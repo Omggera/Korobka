@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:Korobka.MVVM"
              x:Class="Korobka.MainPage">
 
     <ContentPage.Resources>
@@ -18,7 +17,7 @@
                         <VisualState x:Name="Selected">
                             <VisualState.Setters>
                                 <Setter Property="BackgroundColor"
-                                        Value="LightSkyBlue" />
+                                        Value="#0090B7" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -27,10 +26,6 @@
         </Style>
     </ContentPage.Resources>
 
-    <ContentPage.BindingContext>
-        <local:BarCodesClass />
-    </ContentPage.BindingContext>
-    
     <ScrollView>
         <VerticalStackLayout
             Padding="10,0"
@@ -213,9 +208,9 @@
                 IsVisible="false" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <!--
+                        
                         <TextCell Text="{Binding BarCode}" />
-                        -->
+                        
                         <ViewCell>
                             <ViewCell.ContextActions>
                                 <MenuItem Text="Delete"
@@ -236,21 +231,22 @@
 
             <CollectionView 
                 x:Name="CollectionViewBarCode"
+                IsVisible="true"
                 ItemsSource="{Binding BarCodeCollection}"
                 SelectionMode="Single"
                 SelectionChanged="CollectionViewBarCode_SelectionChanged">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <SwipeView >
-                            <SwipeView.LeftItems>
+                            <SwipeView.RightItems>
                                 <SwipeItems>
                                     <SwipeItem 
                                         Text="Удалить"
-                                        BackgroundColor="Red"
-                                        Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.DeleteCommand}"
+                                        BackgroundColor="#A1000E"
+                                        Command="{Binding Source={x:Reference CollectionViewBarCode}, Path=BindingContext.DeleteCommand}"
                                         CommandParameter="{Binding}" />
                                 </SwipeItems>
-                            </SwipeView.LeftItems>
+                            </SwipeView.RightItems>
                             <Grid 
                                 Padding="10">
                                 <Label 
