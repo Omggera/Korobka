@@ -1,7 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Korobka.MainPage">
+             x:Class="Korobka.MainPage"
+             xmlns:viewmodel="clr-namespace:Korobka.ViewModel"
+             x:DataType="viewmodel:MainViewModel">
+    
 
     <ContentPage.Resources>
         <Style TargetType="SwipeView">
@@ -17,7 +20,7 @@
                         <VisualState x:Name="Selected">
                             <VisualState.Setters>
                                 <Setter Property="BackgroundColor"
-                                        Value="#0090B7" />
+                                        Value="White" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -33,7 +36,7 @@
 
             <Label
                 Text="Данные поставки"
-                FontSize="32"
+                FontSize="28"
                 HorizontalOptions="Center"
                 Margin="20"/>
 
@@ -141,7 +144,7 @@
             </Frame>
 
             <Label
-                Text="Отправить в"
+                Text="Выберите способ передачи"
                 FontSize="18" />
             <StackLayout 
                 RadioButtonGroup.GroupName="GetMethod" 
@@ -191,66 +194,36 @@
                 Margin="0,0,0,20">
                 <Entry
                     x:Name="BarCodeEntry"
+                    Text="{Binding Barcode}"
                     Placeholder = "80274257"
                     FontSize="16" 
                     MaxLength ="8"
                     HeightRequest="40"
                     Keyboard="Numeric"
                     ClearButtonVisibility="WhileEditing"
-                    Completed="EntryBarCode_Completed"/>
+                    ReturnCommand="{Binding AddCommand}"/>
             </Frame>
 
-            <!---
-            <ListView 
-                x:Name="ListViewBarCode" 
-                ItemsSource="{Binding BarCodeCollection}"
-                ItemSelected="ListViewBarCode_ItemSelected"
-                IsVisible="false" >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        
-                        <TextCell Text="{Binding BarCode}" />
-                        
-                        <ViewCell>
-                            <ViewCell.ContextActions>
-                                <MenuItem Text="Delete"
-                              Command="{Binding Source={x:Reference ListViewBarCode}, Path=BindingContext.DeleteCommand}"
-                              CommandParameter="{Binding}" />
-                            </ViewCell.ContextActions>
-                            <Label
-                                Text="{Binding BarCode}"
-                                FontSize="16">
-                                
-                            </Label>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
-            -->
-
             <CollectionView 
-                x:Name="CollectionViewBarCode"
                 IsVisible="true"
-                ItemsSource="{Binding BarCodeCollection}"
-                SelectionMode="Single"
-                SelectionChanged="CollectionViewBarCode_SelectionChanged">
+                ItemsSource="{Binding BarcodesList}"
+                SelectionMode="Single">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="{x:Type x:String}">
                         <SwipeView >
                             <SwipeView.RightItems>
                                 <SwipeItems>
                                     <SwipeItem 
                                         Text="Удалить"
                                         BackgroundColor="#A1000E"
-                                        Command="{Binding Source={x:Reference CollectionViewBarCode}, Path=BindingContext.DeleteCommand}"
-                                        CommandParameter="{Binding}" />
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=DeleteCommand}"
+                                        CommandParameter="{Binding .}" />
                                 </SwipeItems>
                             </SwipeView.RightItems>
                             <Grid 
                                 Padding="10">
                                 <Label 
-                                    Text="{Binding BarCode}"
+                                    Text="{Binding .}"
                                     FontSize="16"
                                     HorizontalOptions="Center"
                                     VerticalOptions="Center"/>
@@ -261,9 +234,45 @@
             </CollectionView>
 
             <Label
-                x:Name="wwe"
-                Text=""
+                Text="Выберите способ оплаты"
                 FontSize="18" />
+            <StackLayout 
+                RadioButtonGroup.GroupName="PaymentMethod" 
+                Spacing="10" 
+                Margin="0,0,0,20" >
+                <RadioButton 
+                    x:Name="cash" 
+                    Content="Наличные" 
+                    Value="Наличные" 
+                    FontSize="16"
+                    CheckedChanged="PaymentMethod_CheckedChanged"/>
+                <RadioButton 
+                    x:Name="card"
+                    Content="Карта (+2%)" 
+                    Value="Карта"
+                    FontSize="16"
+                    CheckedChanged="PaymentMethod_CheckedChanged" />
+            </StackLayout>
+
+            <Label
+                Text="{Binding BarcodesListCount}"
+                FontSize="18" />
+
+            <TableView>
+                <TableRoot>
+                    <TableSection Title="Chapters">
+                        <ViewCell>
+                            <Grid >
+                                <Label 
+                                    Text="{Binding BarcodesListCount}"
+                                    FontSize="16"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"/>
+                            </Grid>
+                        </ViewCell>
+                    </TableSection>
+                </TableRoot>
+            </TableView>
 
             <StackLayout Padding="8" Orientation="Horizontal">
                 <CheckBox x:Name="statusCheckBox" />

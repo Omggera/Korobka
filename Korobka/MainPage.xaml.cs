@@ -1,4 +1,5 @@
-﻿using Microsoft.Maui.Controls.Internals;
+﻿using Korobka.ViewModel;
+using Microsoft.Maui.Controls.Internals;
 using Microsoft.VisualBasic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -11,30 +12,17 @@ public partial class MainPage : ContentPage
     DateTime dateWednesday = new DateTime();
     DateTime dateMonday = new DateTime();
 
-    ObservableCollection<BarCodeClass> barCodeCollection = new ObservableCollection<BarCodeClass>();
-    public ObservableCollection<BarCodeClass> BarCodeCollection { get { return barCodeCollection; } }
 
-    BarCodeClass deleteCode;
-
-    public ICommand DeleteCom => new Command<BarCodeClass>(DeleteCommand);
-
-    public class BarCodeClass
-    {
-        public string BarCode { get; set; }
-    }
-
-    public MainPage()
+    public MainPage(MainViewModel vm)
 	{
 		InitializeComponent();
+        BindingContext = vm;
 
         // Дата отправки
         DateDelivery();
         koled.Content = $"Коледино, {dateMonday.ToString("ddd dd MMMM yyyy")}";
         stal.Content = $"Электросталь, {dateWednesday.ToString("ddd dd MMMM yyyy")}";
-
-        //ListViewBarCode.ItemsSource = barCodeCollection;
-        CollectionViewBarCode.ItemsSource = barCodeCollection;
-
+        
     }
 
     public void DateDelivery()
@@ -102,33 +90,9 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private void EntryBarCode_Completed(object sender, EventArgs e)
+    private void PaymentMethod_CheckedChanged(object sender, CheckedChangedEventArgs e)
     {
-        barCodeCollection.Add(new BarCodeClass() { BarCode = $"{BarCodeEntry.Text}"});
-        BarCodeEntry.Text = "";
 
-        //if (barCodeCollection.Count > 0)
-        //{
-        //    CollectionViewBarCode.IsVisible = true;
-        //}
     }
-
-    private void CollectionViewBarCode_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        string previous = (e.PreviousSelection.FirstOrDefault() as BarCodeClass)?.BarCode;
-        string current = (e.CurrentSelection.FirstOrDefault() as BarCodeClass)?.BarCode;
-        wwe.Text = $"Вы выбрали {current}";
-
-        BarCodeClass cur = (e.CurrentSelection.FirstOrDefault() as BarCodeClass);
-
-        deleteCode = cur;
-        //DeleteCommand(cur);
-    }
-
-    private void DeleteCommand(BarCodeClass deleteCode)
-    {
-        barCodeCollection.Remove(deleteCode);
-    }
-
 }
 
