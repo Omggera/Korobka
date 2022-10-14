@@ -1,4 +1,5 @@
-﻿using Korobka.ViewModel;
+﻿using Android.Test.Suitebuilder;
+using Korobka.ViewModel;
 using Microsoft.Maui.Controls.Internals;
 using Microsoft.VisualBasic;
 using System.Collections.ObjectModel;
@@ -12,6 +13,7 @@ public partial class MainPage : ContentPage
     DateTime dateWednesday = new DateTime();
     DateTime dateMonday = new DateTime();
 
+    
 
     public MainPage(MainViewModel vm)
 	{
@@ -22,7 +24,6 @@ public partial class MainPage : ContentPage
         DateDelivery();
         koled.Content = $"Коледино, {dateMonday.ToString("ddd dd MMMM yyyy")}";
         stal.Content = $"Электросталь, {dateWednesday.ToString("ddd dd MMMM yyyy")}";
-        
     }
 
     public void DateDelivery()
@@ -87,6 +88,7 @@ public partial class MainPage : ContentPage
         {
             adress.IsVisible = false;
             adressFrame.IsVisible = false;
+            adressText.Text = null;
         }
     }
 
