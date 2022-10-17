@@ -14,9 +14,70 @@ namespace Korobka.ViewModel
     {
         public MainViewModel()
         {
+            City = new List<string>() { "Владимир", "Иваново", "Муром", "Ковров" };
+            CitySelectedItem = "Владимир";
+
             BarcodesList = new ObservableCollection<string>();
+
+            ValidNameEntry = false;
+            IsReadOnlyNameEntry = false;
+
+            SelectionWarehouse = "Коледино";
+            SelectionGetMethod = "Привезет самостоятельно";
+            SelectionPaymentMethod = "Наличные";
+
+            ValidTelephoneEntry = false;
+            IsReadOnlyTelephoneEntry = false;
+
+            ValidCheckBox = false;
+            ValidGlobal = false;
+
+            AttentionLabel = false;
+
+            CalculateFinalAmount();
         }
 
+        //Блок выбора города
+        [ObservableProperty]
+        List<string> city;
+
+        [ObservableProperty]
+        string citySelectedItem;
+        //Конец блока выбора города
+
+        [ObservableProperty]
+        string selectionWarehouse;
+
+        [ObservableProperty]
+        string nameEntry = "";
+
+        [ObservableProperty]
+        string telephoneEntry = "";
+
+        //Валидация
+        [ObservableProperty]
+        bool validNameEntry;
+
+        [ObservableProperty]
+        bool isReadOnlyNameEntry;
+
+        [ObservableProperty]
+        bool isReadOnlyTelephoneEntry;
+
+        [ObservableProperty]
+        bool validTelephoneEntry;
+
+        [ObservableProperty]
+        bool validCheckBox;
+
+        [ObservableProperty]
+        bool validGlobal;
+        //Конец валидации
+
+        [ObservableProperty]
+        string emailEntry;
+
+        //Блок добавления ШК
         [ObservableProperty]
         ObservableCollection<string> barcodesList;
 
@@ -25,9 +86,13 @@ namespace Korobka.ViewModel
 
         [ObservableProperty]
         string barcode;
+        //Конец блока добавления ШК
 
         //Блок расчета цены
         public int BoxPrice = 200;
+
+        [ObservableProperty]
+        string boxCount;
 
         [ObservableProperty]
         int? boxAmount;
@@ -37,7 +102,9 @@ namespace Korobka.ViewModel
 
         [ObservableProperty]
         int? finalAmount;
+        //Конец блока расчета цены
 
+        //Блок метода полечения коробок
         [ObservableProperty]
         string adress;
 
@@ -45,26 +112,19 @@ namespace Korobka.ViewModel
         string sam = "Привезет самостоятельно";
 
         [ObservableProperty]
-        string vivoz = "Нужен вывоз";
+        string selectionGetMethod;
+        //Конец блока метода полечения коробок
 
-        [ObservableProperty]
-        string getMethod = "getMethod";
-
-        [ObservableProperty]
-        string selectionGetMethod = "Привезет самостоятельно";
-
-        [ObservableProperty]
-        string cash = "Наличные";
-
+        //Блок метода оплаты
         [ObservableProperty]
         string card = "Карта";
 
         [ObservableProperty]
-        string paymentMethod = "PaymentMethod";
+        string selectionPaymentMethod;
+        //Конец блока метода оплаты
 
         [ObservableProperty]
-        string selectionPaymentMethod;
-
+        bool attentionLabel;
 
         [RelayCommand]
         void Add()
@@ -98,7 +158,9 @@ namespace Korobka.ViewModel
         {
             BoxAmount = BarcodesList.Count * BoxPrice;
 
-            if ((Adress == null) | (GetMethod == Sam) | (Adress == ""))
+            BoxCount = $"Коробки ({barcodesListCount} шт.)";
+
+            if ((Adress == null) | (SelectionGetMethod == Sam) | (Adress == ""))
             {
                 DeliveryPrice = 0;
                 Adress = null;
@@ -119,6 +181,38 @@ namespace Korobka.ViewModel
             {
                 FinalAmount += (((BoxAmount + DeliveryPrice) * 2) / 100);
             }
+        }
+
+        [RelayCommand]
+        void ValidationForm()
+        {
+            if((NameEntry != null) & (NameEntry != "")) ValidNameEntry = true;
+            else ValidNameEntry = false;
+
+            if ((TelephoneEntry != null) & (TelephoneEntry != "")) ValidTelephoneEntry = true;
+            else ValidTelephoneEntry = false;
+
+            if ((ValidNameEntry == true) & (ValidTelephoneEntry == true) & (ValidCheckBox == true))
+            {
+                ValidGlobal = true;
+                IsReadOnlyNameEntry = true;
+                IsReadOnlyTelephoneEntry = true;
+                AttentionLabel = false;
+            }
+                
+            else
+            {
+                ValidGlobal = false;
+                IsReadOnlyNameEntry = false;
+                IsReadOnlyTelephoneEntry = false;
+
+                if ((ValidNameEntry == true) & (ValidTelephoneEntry == true) & (ValidCheckBox == false))
+                    AttentionLabel = false;
+                else AttentionLabel = true;
+
+                ValidCheckBox = false;
+            }
+                
         }
     }
 }

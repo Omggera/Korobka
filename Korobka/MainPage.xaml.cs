@@ -1,4 +1,4 @@
-﻿using Android.Test.Suitebuilder;
+﻿//using Android.Test.Suitebuilder;
 using Korobka.ViewModel;
 using Microsoft.Maui.Controls.Internals;
 using Microsoft.VisualBasic;
@@ -24,6 +24,8 @@ public partial class MainPage : ContentPage
         DateDelivery();
         koled.Content = $"Коледино, {dateMonday.ToString("ddd dd MMMM yyyy")}";
         stal.Content = $"Электросталь, {dateWednesday.ToString("ddd dd MMMM yyyy")}";
+        koled.Value = dateMonday.ToString("ddd dd MMMM yy");
+        stal.Value = dateWednesday.ToString("ddd dd MMMM yy");
     }
 
     public void DateDelivery()
@@ -65,17 +67,6 @@ public partial class MainPage : ContentPage
         }
     }
 
-	private void City_SelectedIndexChanged(object sender, EventArgs e)
-	{
-
-	}
-
-	private void Warehouse_CheckedChanged(object sender, CheckedChangedEventArgs e)
-	{
-        RadioButton selectedWarehouse = ((RadioButton)sender);
-
-    }
-
     private void GetMethod_CheckedChanged(object sender, CheckedChangedEventArgs e)
     {
         RadioButton selectedGetMethod = ((RadioButton)sender);
@@ -90,11 +81,6 @@ public partial class MainPage : ContentPage
             adressFrame.IsVisible = false;
             adressText.Text = null;
         }
-    }
-
-    private void PaymentMethod_CheckedChanged(object sender, CheckedChangedEventArgs e)
-    {
-
     }
 }
 
