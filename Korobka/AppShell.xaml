@@ -4,11 +4,113 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Korobka"
-    Shell.FlyoutBehavior="Flyout">
+    Shell.FlyoutBehavior="Flyout"
+    Shell.TabBarIsVisible="False">
+
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid 
+                x:Name="FlyoutItemLayout"
+                HeightRequest="{OnPlatform 44, Android=50}"
+                ColumnSpacing="{OnPlatform WinUI=0}"
+                RowSpacing="{OnPlatform WinUI=0}">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                            Value="Transparent" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                            Value="#100090B7" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{OnPlatform Android=54, iOS=50, WinUI=Auto}" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image 
+                    x:Name="FlyoutItemImage"
+                    Source="{Binding FlyoutIcon}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="{OnPlatform Default=Center, WinUI=Start}"
+                    HeightRequest="{OnPlatform Android=24, iOS=22, WinUI=16}"
+                    WidthRequest="{OnPlatform Android=24, iOS=22, WinUI=16}">
+                    <Image.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <OnPlatform.Platforms>
+                                <On Platform="WinUI"
+                                    Value="12,0,12,0" />
+                            </OnPlatform.Platforms>
+                        </OnPlatform>
+                    </Image.Margin>
+                </Image>
+                <Label 
+                    x:Name="FlyoutItemLabel"
+                    Grid.Column="1"
+                    Text="{Binding Title}"
+                    FontSize="{OnPlatform Android=16, iOS=14}"
+                    FontAttributes="{OnPlatform iOS=Bold}"
+                    HorizontalOptions="{OnPlatform WinUI=Start}"
+                    HorizontalTextAlignment="{OnPlatform WinUI=Start}"
+                    VerticalTextAlignment="Center">
+                    <Label.TextColor>
+                        <OnPlatform x:TypeArguments="Color">
+                            <OnPlatform.Platforms>
+                                <On Platform="Android"
+                                    Value="Black" />
+                            </OnPlatform.Platforms>
+                        </OnPlatform>
+                    </Label.TextColor>
+                    <Label.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <OnPlatform.Platforms>
+                                <On Platform="Android"
+                                    Value="20, 0, 0, 0" />
+                            </OnPlatform.Platforms>
+                        </OnPlatform>
+                    </Label.Margin>
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.Platforms>
+                                <On Platform="Android"
+                                    Value="sans-serif-medium" />
+                            </OnPlatform.Platforms>
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+    <Shell.FlyoutHeader>
+        <Image Source="flyoutheader.svg"/>
+    </Shell.FlyoutHeader>
 
     <ShellContent
-        Title="Добавить поставку"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+            x:Name="add"
+            Title="Создать заявку"
+            Icon="add.svg"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage" />
+
+    <ShellContent
+            Title="Условия"
+            Icon="info.svg"
+            ContentTemplate="{DataTemplate local:Conditions}"
+            Route="Conditions" />
+
+    <ShellContent
+            Title="Контакты"
+            Icon="users.svg"
+            ContentTemplate="{DataTemplate local:Contacts}"
+            Route="Contacts" />
 
 </Shell>

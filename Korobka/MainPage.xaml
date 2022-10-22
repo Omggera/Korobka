@@ -404,8 +404,22 @@
             <Button
                 Text="Создать заявку"
                 IsEnabled="{Binding ValidGlobal}">
+                <Button.Behaviors>
+                    <toolkit:EventToCommandBehavior
+                        EventName="Clicked"
+                        Command="{Binding CreateCommand}" />
+                </Button.Behaviors>
             </Button>
-            
+
+            <Button
+                Text="Alert" 
+                Clicked="Button_Clicked">
+            </Button>
+            <Label
+                x:Name="lab"
+                Text=""
+                FontSize="18" />
+
         </VerticalStackLayout>
     </ScrollView>
 

@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Korobka;
+using Korobka.Models;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace Korobka.ViewModel
 {
@@ -35,7 +38,20 @@ namespace Korobka.ViewModel
             AttentionLabel = false;
 
             CalculateFinalAmount();
+
+            Mongo = new();
+
+            DateNewOrderUTC = DateTime.Now;
         }
+
+        [ObservableProperty]
+        MongoDBConnect mongo;
+
+        [ObservableProperty]
+        long orderNum;
+
+        [ObservableProperty]
+        DateTimeOffset dateNewOrderUTC;
 
         //Блок выбора города
         [ObservableProperty]
@@ -211,8 +227,40 @@ namespace Korobka.ViewModel
                 else AttentionLabel = true;
 
                 ValidCheckBox = false;
-            }
-                
+            }  
         }
+
+        [RelayCommand]
+        void Create()
+        {
+            OrderNum = Mongo.AllDocCount() + 1;
+
+            //Добавляем данные в БД
+            BsonDocument doc = new BsonDocument
+            {
+            {"orderNum",$"{OrderNum}"},
+            {"status","Новый"},
+            {"dateOrder",$"{DateNewOrderUTC}"},
+            {"city",$"{CitySelectedItem}"},
+            {"dateDevivery",$"{SelectionWarehouse}"},
+            {"clientName",$"{NameEntry}"},
+            {"clientPhone",$"{TelephoneEntry}"},
+            {"clientMail",$"{EmailEntry}"},
+            {"getMethod",$"{SelectionGetMethod}"},
+            {"clientAdress",$"{Adress}"},
+            {"paymentMethod",$"{SelectionPaymentMethod}"},
+            {"finalAmount",$"{FinalAmount}"},
+            {"barcodes", new BsonArray(BarcodesList)}
+            };
+
+            mongo.AddDoc(doc).GetAwaiter();
+        }
+
+
+        //[RelayCommand]
+        //async void Alert()
+        //{
+        //    await DisplayAlert("Уведомление", "Пришло новое сообщение", "ОK");
+        //}
     }
 }

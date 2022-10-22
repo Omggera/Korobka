@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using Korobka.Models;
 using Korobka.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,7 +19,7 @@ public static class MauiProgram
 			});
 
 		builder.Services.AddSingleton<MainPage>();
-		builder.Services.AddSingleton<MainViewModel>();
+        builder.Services.AddSingleton<MainViewModel>();
         builder.UseMauiApp<App>();
         builder.UseMauiCommunityToolkit();
 

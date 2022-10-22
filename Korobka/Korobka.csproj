@@ -28,6 +28,7 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+		<UserSecretsId>85c4ecd9-abea-4d1c-b859-bb9d9f36ec3d</UserSecretsId>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -51,7 +52,19 @@
 	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Maui" Version="1.3.0" />
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
 	  <PackageReference Include="MongoDB.Driver" Version="2.18.0" />
+	  <PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.2" />
+	  <PackageReference Include="SSH.NET" Version="2020.0.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Conditions.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Contacts.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 
