@@ -7,10 +7,37 @@
         <VerticalStackLayout
             Padding="10,0"
             Spacing="10">
+            
             <Label 
-            Text="Contacts"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+                Text="Адрес и режим работы"
+                FontSize="28"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                Margin="10"/>
+
+            <Frame 
+                BorderColor="Gray" 
+                HasShadow="False" 
+                HeightRequest="90" 
+                Margin="0,0,0,20">
+                <StackLayout>
+                    <Grid
+                        RowDefinitions="Auto,Auto"
+                        ColumnDefinitions="Auto">
+                        <Label 
+                            Text="г. Владимир, ул. Ново-Ямская, д. 75"
+                            FontSize="16"
+                            Margin="0,0,0,10"/>
+                        <Label 
+                        Grid.Row="1"   
+                        Text="С понедельника по четверг с 10 до 19"
+                        FontSize="16"/>
+                    </Grid>
+                </StackLayout>
+            </Frame>
+
+
+
         </VerticalStackLayout>
     </ScrollView>
 

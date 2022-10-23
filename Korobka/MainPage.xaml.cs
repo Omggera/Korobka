@@ -15,7 +15,6 @@ public partial class MainPage : ContentPage
     DateTime dateWednesday = new DateTime();
     DateTime dateMonday = new DateTime();
 
-
     public MainPage(MainViewModel vm)
 	{
 		InitializeComponent();
@@ -84,12 +83,16 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private async void Button_Clicked(object sender, EventArgs e)
+    private void Button_Clicked(object sender, EventArgs e)
     {
-        var httpClient = new HttpClient();
-        var resultJson = await httpClient.GetStringAsync("http://188.225.85.229:5002/");
-        var resultValue = JsonConvert.DeserializeObject<JsonFile>(resultJson);
-        lab.Text = resultValue.Host.ToString();
+        NextPage().GetAwaiter();
+    }
+
+    public async Task NextPage()
+    {
+        await Shell.Current.GoToAsync(nameof(Message));
     }
 }
+
+
 

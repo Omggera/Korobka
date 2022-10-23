@@ -39,7 +39,7 @@
                 Text="Данные поставки"
                 FontSize="28"
                 HorizontalOptions="Center"
-                Margin="20"/>
+                Margin="10"/>
 
             <Label
                 Text="Город"
@@ -166,6 +166,7 @@
                 HeightRequest="40" 
                 Margin="0,0,0,20">
                 <Entry
+                    x:Name="email"
                     Placeholder = "ivanov@yandex.ru"
                     FontSize="16" 
                     MaxLength ="50"
@@ -403,22 +404,14 @@
 
             <Button
                 Text="Создать заявку"
-                IsEnabled="{Binding ValidGlobal}">
+                IsEnabled="{Binding ValidGlobal}"
+                Clicked="Button_Clicked">
                 <Button.Behaviors>
                     <toolkit:EventToCommandBehavior
                         EventName="Clicked"
                         Command="{Binding CreateCommand}" />
                 </Button.Behaviors>
             </Button>
-
-            <Button
-                Text="Alert" 
-                Clicked="Button_Clicked">
-            </Button>
-            <Label
-                x:Name="lab"
-                Text=""
-                FontSize="18" />
 
         </VerticalStackLayout>
     </ScrollView>

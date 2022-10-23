@@ -254,6 +254,22 @@ namespace Korobka.ViewModel
             };
 
             mongo.AddDoc(doc).GetAwaiter();
+
+            CitySelectedItem = "Владимир";
+            SelectionGetMethod = "Привезет самостоятельно";
+            SelectionPaymentMethod = "Наличные";
+            NameEntry = "";
+            TelephoneEntry = "";
+            EmailEntry = "";
+            Adress = "";
+            ValidGlobal = false;
+            IsReadOnlyNameEntry = false;
+            IsReadOnlyTelephoneEntry = false;
+            ValidCheckBox = false;
+            AttentionLabel = false;
+            BarcodesList.Clear();
+            CalculateFinalAmount();
+
         }
 
 

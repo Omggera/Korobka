@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:Korobka"
+             x:DataType="viewmodel:Message"
+             x:Class="Korobka.Message">
+    <VerticalStackLayout
+            Padding="10,0"
+            Spacing="10">
+
+        <Image 
+            Source="okone.svg"
+            Margin="0,10,0,0">
+        </Image>
+
+        <Label 
+            Text="Ваша заявка отправлена!"
+            FontSize="24"
+            HorizontalOptions="Center"
+            Margin="0,0,0,10">
+        </Label>
+
+        <Label 
+            FontSize="16"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            Margin="0,0,0,10"
+            HorizontalTextAlignment="Center">
+            <Label.Text>
+                <x:String>
+В ближайшее время с вами свяжется наш
+менеджер для уточнения деталей.
+                </x:String>
+            </Label.Text>
+        </Label>
+
+        <Label 
+            FontSize="16"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            Margin="0,0,0,00"
+            HorizontalTextAlignment="Center">
+            <Label.Text>
+                <x:String>
+Подробнее о режиме работы вы можете 
+узнать в разделе Контакты или позвонив
+по телефону: 
+                </x:String>
+            </Label.Text>
+        </Label>
+
+        <Label 
+            Text="+7(901)141-8686"
+            FontSize="16"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            Margin="0,0,0,-10"
+            HorizontalTextAlignment="Center"
+            TextColor="#0090B7"
+            TextDecorations="Underline">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer 
+                    Tapped="TapGestureRecognizer_Tapped"/>
+            </Label.GestureRecognizers>
+        </Label>
+
+    </VerticalStackLayout>
+</ContentPage>
