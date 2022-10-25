@@ -412,7 +412,7 @@
                         Command="{Binding CreateCommand}" />
                 </Button.Behaviors>
             </Button>
-
+            
         </VerticalStackLayout>
     </ScrollView>
 

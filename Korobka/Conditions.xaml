@@ -7,10 +7,85 @@
         <VerticalStackLayout
             Padding="10,0"
             Spacing="10">
+
             <Label 
-            Text="Conditions"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+                Text="Условия и документы"
+                FontSize="28"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                Margin="0,10,0,0"/>
+
+            <Frame 
+                BorderColor="Gray" 
+                HasShadow="False" 
+                HeightRequest="230" 
+                Margin="0,0,0,10">
+                <StackLayout>
+                    <Label  
+                        Text="Договор на оказание &#10;транспортных услуг"
+                        FontSize="18"
+                        FontAttributes = "Bold"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        TextColor="#0090B7"
+                        TextDecorations="Underline"
+                        Margin="0,0,0,20">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                    Tapped="TapGestureRecognizer_Tapped_1"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    
+                    <Label  
+                        Text="Обработка персональных данных"
+                        FontSize="18"
+                        FontAttributes = "Bold"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        TextColor="#0090B7"
+                        TextDecorations="Underline"
+                        Margin="0,0,0,20">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                    Tapped="TapGestureRecognizer_Tapped_2"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <Label  
+                        Text="Приложение к договору №1"
+                        FontSize="18"
+                        FontAttributes = "Bold"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        TextColor="#0090B7"
+                        TextDecorations="Underline"
+                        Margin="0,0,0,20">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                    Tapped="TapGestureRecognizer_Tapped_3"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <Label  
+                        Text="Приложение к договору №2"
+                        FontSize="18"
+                        FontAttributes = "Bold"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        TextColor="#0090B7"
+                        TextDecorations="Underline">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                    Tapped="TapGestureRecognizer_Tapped_4"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+            </Frame>
+            
         </VerticalStackLayout>
     </ScrollView>
 

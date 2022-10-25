@@ -3,9 +3,11 @@
     x:Class="Korobka.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:local="clr-namespace:Korobka"
     Shell.FlyoutBehavior="Flyout"
-    Shell.TabBarIsVisible="False">
+    Shell.TabBarIsVisible="False"
+    FlyoutBackgroundColor="White">
 
     <Shell.ItemTemplate>
         <DataTemplate>
@@ -20,13 +22,19 @@
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
                                     <Setter Property="BackgroundColor"
-                                            Value="Transparent" />
+                                            Value="White" />
+                                    <Setter TargetName="FlyoutItemLabel"
+                                            Property="Label.TextColor"
+                                            Value="Black" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Selected">
                                 <VisualState.Setters>
                                     <Setter Property="BackgroundColor"
-                                            Value="#100090B7" />
+                                            Value="#0090B7" />
+                                    <Setter TargetName="FlyoutItemLabel"
+                                            Property="Label.TextColor"
+                                            Value="White" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
@@ -57,18 +65,10 @@
                     Grid.Column="1"
                     Text="{Binding Title}"
                     FontSize="{OnPlatform Android=16, iOS=14}"
-                    FontAttributes="{OnPlatform iOS=Bold}"
+                    FontAttributes="{OnPlatform iOS=Bold,Android=Bold}"
                     HorizontalOptions="{OnPlatform WinUI=Start}"
                     HorizontalTextAlignment="{OnPlatform WinUI=Start}"
                     VerticalTextAlignment="Center">
-                    <Label.TextColor>
-                        <OnPlatform x:TypeArguments="Color">
-                            <OnPlatform.Platforms>
-                                <On Platform="Android"
-                                    Value="Black" />
-                            </OnPlatform.Platforms>
-                        </OnPlatform>
-                    </Label.TextColor>
                     <Label.Margin>
                         <OnPlatform x:TypeArguments="Thickness">
                             <OnPlatform.Platforms>

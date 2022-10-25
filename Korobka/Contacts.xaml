@@ -13,29 +13,195 @@
                 FontSize="28"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center"
-                Margin="10"/>
+                Margin="0,10,0,0"/>
 
             <Frame 
                 BorderColor="Gray" 
                 HasShadow="False" 
-                HeightRequest="90" 
-                Margin="0,0,0,20">
+                HeightRequest="150" 
+                Margin="0,0,0,10">
                 <StackLayout>
                     <Grid
                         RowDefinitions="Auto,Auto"
-                        ColumnDefinitions="Auto">
+                        ColumnDefinitions="1*">
                         <Label 
-                            Text="г. Владимир, ул. Ново-Ямская, д. 75"
-                            FontSize="16"
+                            Grid.Row="0" 
+                            Text="г. Владимир, &#10;ул. Ново-Ямская, д. 75"
+                            FontSize="18"
                             Margin="0,0,0,10"/>
                         <Label 
-                        Grid.Row="1"   
-                        Text="С понедельника по четверг с 10 до 19"
-                        FontSize="16"/>
+                            Grid.Row="1"   
+                            Text="С понедельника по четверг &#10;с 10 до 19"
+                            FontSize="18"
+                            Margin="0,0,0,10"/>
                     </Grid>
                 </StackLayout>
             </Frame>
 
+            <Image
+                Source="map.jpg"/>
+
+            <Label 
+                Text="Телефон"
+                FontSize="28"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                Margin="0,10,0,0"/>
+
+            <Frame 
+                BorderColor="Gray" 
+                BackgroundColor="White"
+                HasShadow="False" 
+                HeightRequest="65">
+                <StackLayout>
+                    <Grid>
+                        <Label 
+                            Text="+7 (901) 141-86-86"
+                            FontSize="18"
+                            FontAttributes = "Bold"
+                            VerticalOptions="Center" 
+                            HorizontalOptions="Center"
+                            HorizontalTextAlignment="Center"
+                            TextColor="#0090B7"
+                            TextDecorations="Underline">    
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Tapped="TapGestureRecognizer_Tapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                </StackLayout>
+            </Frame>
+
+            <Label 
+                Text="Мессенджеры"
+                FontSize="28"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                Margin="0,10,0,0"/>
+
+            <Frame 
+                BorderColor="Gray" 
+                BackgroundColor="White"
+                HasShadow="False" 
+                HeightRequest="150" 
+                Margin="0,0,0,10">
+                <StackLayout>
+                    <Grid
+                        RowDefinitions="Auto,Auto,Auto"
+                        ColumnDefinitions="0.2*,1*,0.2*,0.5*">
+                        <Image
+                            Grid.Row="0" 
+                            Grid.Column="0" 
+                            Source="whatsapp48.svg"
+                            Margin="0,-10,0,0">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Tapped="TapGestureRecognizer_Tapped_WhastApp"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Label
+                            Grid.Row="0" 
+                            Grid.Column="1" 
+                            Text="WhatsApp"
+                            FontSize="18"
+                            Margin="5,0,0,10">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Tapped="TapGestureRecognizer_Tapped_WhastApp"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                        <Image
+                            Grid.Row="1" 
+                            Grid.Column="0" 
+                            Source="vk48.svg"
+                            Margin="0,-10,0,0">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Tapped="TapGestureRecognizer_Tapped_VK"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Label 
+                            Grid.Row="1" 
+                            Grid.Column="1" 
+                            Text="Вконтакте"
+                            FontSize="18"
+                            Margin="5,0,0,10">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Tapped="TapGestureRecognizer_Tapped_VK"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                        <Image
+                            Grid.Row="2" 
+                            Grid.Column="0" 
+                            Source="telegram48.svg"
+                            Margin="0,-10,0,0">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Tapped="TapGestureRecognizer_Tapped_Telegram"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Label 
+                            Grid.Row="2"  
+                            Grid.Column="1" 
+                            Text="Telegram"
+                            FontSize="18"
+                            Margin="5,0,0,10">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Tapped="TapGestureRecognizer_Tapped_Telegram"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                        <Image
+                            Grid.Row="0" 
+                            Grid.Column="2" 
+                            Source="viber48.svg"
+                            Margin="0,-10,0,0">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Tapped="TapGestureRecognizer_Tapped_Viber"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Label 
+                            Grid.Row="0" 
+                            Grid.Column="3" 
+                            Text="Viber"
+                            FontSize="18"
+                            Margin="5,0,0,10">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Tapped="TapGestureRecognizer_Tapped_Viber"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                        <Image
+                            Grid.Row="1" 
+                            Grid.Column="2" 
+                            Source="email48.svg"
+                            Margin="0,-10,0,0">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Tapped="TapGestureRecognizer_Tapped_Mail"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Label 
+                            Grid.Row="1"  
+                            Grid.Column="3" 
+                            Text="Почта"
+                            FontSize="18"
+                            Margin="5,0,0,10">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Tapped="TapGestureRecognizer_Tapped_Mail"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                </StackLayout>
+            </Frame>
 
 
         </VerticalStackLayout>
