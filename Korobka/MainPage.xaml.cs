@@ -1,6 +1,9 @@
-﻿using Korobka.ViewModel;
+﻿//using Android.Test.Suitebuilder;
+using Korobka.Models;
+using Korobka.ViewModel;
 using Microsoft.Maui.Controls.Internals;
 using Microsoft.VisualBasic;
+using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -12,7 +15,6 @@ public partial class MainPage : ContentPage
     DateTime dateWednesday = new DateTime();
     DateTime dateMonday = new DateTime();
 
-
     public MainPage(MainViewModel vm)
 	{
 		InitializeComponent();
@@ -22,7 +24,8 @@ public partial class MainPage : ContentPage
         DateDelivery();
         koled.Content = $"Коледино, {dateMonday.ToString("ddd dd MMMM yyyy")}";
         stal.Content = $"Электросталь, {dateWednesday.ToString("ddd dd MMMM yyyy")}";
-        
+        koled.Value = dateMonday.ToString("ddd dd MMMM yy");
+        stal.Value = dateWednesday.ToString("ddd dd MMMM yy");
     }
 
     public void DateDelivery()
@@ -64,17 +67,6 @@ public partial class MainPage : ContentPage
         }
     }
 
-	private void City_SelectedIndexChanged(object sender, EventArgs e)
-	{
-
-	}
-
-	private void Warehouse_CheckedChanged(object sender, CheckedChangedEventArgs e)
-	{
-        RadioButton selectedWarehouse = ((RadioButton)sender);
-
-    }
-
     private void GetMethod_CheckedChanged(object sender, CheckedChangedEventArgs e)
     {
         RadioButton selectedGetMethod = ((RadioButton)sender);
@@ -87,12 +79,20 @@ public partial class MainPage : ContentPage
         {
             adress.IsVisible = false;
             adressFrame.IsVisible = false;
+            adressText.Text = null;
         }
     }
 
-    private void PaymentMethod_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    private void Button_Clicked(object sender, EventArgs e)
     {
+        NextPage().GetAwaiter();
+    }
 
+    public async Task NextPage()
+    {
+        await Shell.Current.GoToAsync(nameof(Message));
     }
 }
+
+
 
