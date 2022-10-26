@@ -5,9 +5,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:local="clr-namespace:Korobka"
+    xmlns:viewmodel="clr-namespace:Korobka.ViewModel"
+    x:DataType="viewmodel:AppShellViewModel"
     Shell.FlyoutBehavior="Flyout"
     Shell.TabBarIsVisible="False"
-    FlyoutBackgroundColor="White">
+    FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}">
 
     <Shell.ItemTemplate>
         <DataTemplate>
@@ -22,10 +24,10 @@
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
                                     <Setter Property="BackgroundColor"
-                                            Value="White" />
+                                            Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}" />
                                     <Setter TargetName="FlyoutItemLabel"
                                             Property="Label.TextColor"
-                                            Value="Black" />
+                                            Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Selected">
@@ -46,6 +48,7 @@
                 </Grid.ColumnDefinitions>
                 <Image 
                     x:Name="FlyoutItemImage"
+                    x:DataType="local:AppShell"
                     Source="{Binding FlyoutIcon}"
                     VerticalOptions="Center"
                     HorizontalOptions="{OnPlatform Default=Center, WinUI=Start}"
@@ -59,10 +62,37 @@
                             </OnPlatform.Platforms>
                         </OnPlatform>
                     </Image.Margin>
+                    <Image.Triggers>
+                        <DataTrigger 
+                            TargetType="Image"
+                            Binding="{Binding Title}"
+                            Value="Создать заявку">
+                            <Setter 
+                                Property="Source"
+                                Value="{AppThemeBinding Light=add.svg, Dark=add_white.svg}" />
+                        </DataTrigger>
+                        <DataTrigger 
+                            TargetType="Image"
+                            Binding="{Binding Title}"
+                            Value="Условия">
+                            <Setter 
+                                Property="Source"
+                                Value="{AppThemeBinding Light=info.svg, Dark=info_white.svg}" />
+                        </DataTrigger>
+                        <DataTrigger 
+                            TargetType="Image"
+                            Binding="{Binding Title}"
+                            Value="Контакты">
+                            <Setter 
+                                Property="Source"
+                                Value="{AppThemeBinding Light=users.svg, Dark=users_white.svg}" />
+                        </DataTrigger>
+                    </Image.Triggers>
                 </Image>
                 <Label 
                     x:Name="FlyoutItemLabel"
                     Grid.Column="1"
+                    x:DataType="local:AppShell"
                     Text="{Binding Title}"
                     FontSize="{OnPlatform Android=16, iOS=14}"
                     FontAttributes="{OnPlatform iOS=Bold,Android=Bold}"
@@ -91,26 +121,55 @@
     </Shell.ItemTemplate>
 
     <Shell.FlyoutHeader>
-        <Image Source="flyoutheader.svg"/>
+        <Image Source="{AppThemeBinding Light=flyoutheader.svg, Dark=flyoutheader_black_wh.svg}"/>
     </Shell.FlyoutHeader>
 
     <ShellContent
-            x:Name="add"
-            Title="Создать заявку"
-            Icon="add.svg"
-            ContentTemplate="{DataTemplate local:MainPage}"
-            Route="MainPage" />
+        Title="Создать заявку"
+        Icon="add.svg"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage">
+    </ShellContent>
 
     <ShellContent
-            Title="Условия"
-            Icon="info.svg"
-            ContentTemplate="{DataTemplate local:Conditions}"
-            Route="Conditions" />
+        Title="Условия"
+        Icon="info.svg"
+        ContentTemplate="{DataTemplate local:Conditions}"
+        Route="Conditions">
+    </ShellContent>
 
     <ShellContent
-            Title="Контакты"
-            Icon="users.svg"
-            ContentTemplate="{DataTemplate local:Contacts}"
-            Route="Contacts" />
+        Title="Контакты"
+        Icon="users.svg"
+        ContentTemplate="{DataTemplate local:Contacts}"
+        Route="Contacts" >
+    </ShellContent>
+
+    <Shell.FlyoutFooter>
+        <StackLayout
+            Orientation="Horizontal"
+            HorizontalOptions="Start"
+            Padding="10,0,0,0">
+            <Image 
+                Source="{AppThemeBinding Light=star_moon_black, Dark=star_moon_white.svg}"
+                Margin="0,0,5,0">
+            </Image>
+            <Switch 
+                OnColor="#7BDDEF"
+                ThumbColor="#0090B7"
+                IsToggled="{Binding IsToggled}"
+                Margin="0,0,5,0">
+                <Switch.Behaviors>
+                    <toolkit:EventToCommandBehavior
+                        EventName="Toggled"
+                        Command="{Binding SwitchCommand}" />
+                </Switch.Behaviors>
+            </Switch>
+            <Image 
+                Source="{AppThemeBinding Light=sun_black.svg, Dark=sun_white.svg}"
+                Margin="0,0,0,0">
+            </Image>
+        </StackLayout>
+    </Shell.FlyoutFooter>
 
 </Shell>
