@@ -115,13 +115,39 @@
                             </OnPlatform.Platforms>
                         </OnPlatform>
                     </Label.FontFamily>
+                    <Label.Triggers>
+                        <DataTrigger 
+                            TargetType="Label"
+                            Binding="{Binding Title}"
+                            Value="Создать заявку">
+                            <Setter 
+                                Property="Text"
+                                Value="Создать заявку" />
+                        </DataTrigger>
+                        <DataTrigger 
+                            TargetType="Label"
+                            Binding="{Binding Title}"
+                            Value="Условия">
+                            <Setter 
+                                Property="Text"
+                                Value="Условия" />
+                        </DataTrigger>
+                        <DataTrigger 
+                            TargetType="Label"
+                            Binding="{Binding Title}"
+                            Value="Контакты">
+                            <Setter 
+                                Property="Text"
+                                Value="Контакты" />
+                        </DataTrigger>
+                    </Label.Triggers>
                 </Label>
             </Grid>
         </DataTemplate>
     </Shell.ItemTemplate>
 
     <Shell.FlyoutHeader>
-        <Image Source="{AppThemeBinding Light=flyoutheader.svg, Dark=flyoutheader_black_wh.svg}"/>
+        <Image Source="{AppThemeBinding Light=flyoutheader.svg, Dark=flyoutheader_light_gray_two.svg}"/>
     </Shell.FlyoutHeader>
 
     <ShellContent
@@ -149,7 +175,7 @@
         <StackLayout
             Orientation="Horizontal"
             HorizontalOptions="Start"
-            Padding="10,0,0,0">
+            Padding="20,0,0,0">
             <Image 
                 Source="{AppThemeBinding Light=star_moon_black, Dark=star_moon_white.svg}"
                 Margin="0,0,5,0">

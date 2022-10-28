@@ -18,12 +18,6 @@ namespace Korobka.ViewModel
         }
 
         [ObservableProperty]
-        string flyoutBackgroundColor;
-
-        [ObservableProperty]
-        string icoSource;
-
-        [ObservableProperty]
         bool isToggled;
 
         [RelayCommand]

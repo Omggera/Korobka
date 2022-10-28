@@ -20,6 +20,7 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton<MainPage>();
         builder.Services.AddSingleton<MainViewModel>();
+        builder.Services.AddSingleton<AppShell>();
         builder.Services.AddSingleton<AppShellViewModel>(); 
         builder.UseMauiApp<App>();
         builder.UseMauiCommunityToolkit();
