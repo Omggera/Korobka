@@ -440,10 +440,6 @@
                 </Button.Behaviors>
             </Button>
 
-            <ProgressBar 
-                x:Name="progressBar"
-                Progress="0" />
-
         </VerticalStackLayout>
     </ScrollView>
 
