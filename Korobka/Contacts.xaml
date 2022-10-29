@@ -50,7 +50,6 @@
 
             <Frame 
                 BorderColor="Gray" 
-                BackgroundColor="White"
                 HasShadow="False" 
                 HeightRequest="65">
                 <StackLayout>
@@ -82,7 +81,6 @@
 
             <Frame 
                 BorderColor="Gray" 
-                BackgroundColor="White"
                 HasShadow="False" 
                 HeightRequest="150" 
                 Margin="0,0,0,10">

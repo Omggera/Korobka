@@ -1,4 +1,6 @@
-﻿namespace Korobka;
+﻿using Korobka.ViewModel;
+
+namespace Korobka;
 
 public partial class AppShell : Shell
 {
@@ -6,6 +8,10 @@ public partial class AppShell : Shell
 	{
 		InitializeComponent();
 
+		BindingContext = new AppShellViewModel();
+
         Routing.RegisterRoute(nameof(Message), typeof(Message));
+
     }
+
 }
